@@ -18,14 +18,17 @@ public class App extends Application {
         var scene = new Scene(paneRoot, TAM_X_PANTALLA, TAM_Y_PANTALLA);
         stage.setScene(scene);
         stage.show();
+        ComportamientoGato compGato = new ComportamientoGato();
         for(int x = 30; x<TAM_X_PANTALLA; x+= 45 ) {
-            for(int y = 30; y<TAM_Y_PANTALLA; y+= 45 ) {
+            for(int y = 50; y<TAM_Y_PANTALLA; y+= 45 ) {
                 Tablero tablero = new Tablero();
                 tablero.setCenterX(x);
                 tablero.setCenterY(y);
+                tablero.gris(compGato);
                 paneRoot.getChildren().add(tablero);
             }
         }
+       compGato.generarGato(paneRoot);
     }
 
     public static void main(String[] args) {

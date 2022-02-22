@@ -17,11 +17,14 @@ public class App extends Application {
         Pane paneRoot = new Pane();
         var scene = new Scene(paneRoot, TAM_X_PANTALLA, TAM_Y_PANTALLA);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
         ComportamientoGato compGato = new ComportamientoGato();
+        Logica logica = new Logica();
+        logica.mostrarTableroConsola();
         for(int x = 30; x<TAM_X_PANTALLA; x+= 45 ) {
             for(int y = 50; y<TAM_Y_PANTALLA; y+= 45 ) {
-                Tablero tablero = new Tablero();
+                Tablero tablero = new Tablero(logica);
                 tablero.setCenterX(x);
                 tablero.setCenterY(y);
                 tablero.gris(compGato);
@@ -29,6 +32,11 @@ public class App extends Application {
             }
         }
        compGato.generarGato(paneRoot);
+       while(true) {
+            logica.colocarGris(3, 3);
+            logica.gato(1, 1);
+            logica.mostrarTableroConsola();
+        }
     }
 
     public static void main(String[] args) {

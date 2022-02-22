@@ -43,8 +43,4 @@ public class ComportamientoGato {
                 break;
         }
     }
-    
-    public void compGris() {
-        
-    }
 }

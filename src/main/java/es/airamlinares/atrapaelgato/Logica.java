@@ -1,5 +1,7 @@
 package es.airamlinares.atrapaelgato;
 
+import java.util.Random;
+
 /**
  *
  * @author Airam
@@ -11,6 +13,8 @@ public class Logica {
     static final char AZUL = '1';
     static final char GRIS = '2';
     static final char GATO = '3';
+    int posGX = 7;
+    int posGY = 5;
     
     public Logica() {
         tamXTablero = 14;
@@ -35,7 +39,34 @@ public class Logica {
     public void colocarGris(int posX, int posY) {
         circulos[posX][posY] = GRIS;
     }
-    public void gato(int posX, int posY) {
-        circulos[posX][posY] = GATO;
+//    public void gato(int posX, int posY) {
+//        circulos[posX][posY] = GATO;
+//    }
+    public void movGato() {
+        Random random = new Random();
+        int dir = random.nextInt(4);
+        System.out.println(dir);
+        if(posGX<=12 && posGY<=8 && posGX>0 && posGY>0) {
+            switch (dir) {
+                case 0:
+                    posGY-= 1;
+                    circulos[posGX][posGY+1] = AZUL;
+                    break;
+                case 1:
+                    posGY+= 1;
+                    circulos[posGX][posGY-1] = AZUL;
+                    break;
+                case 2:
+                    posGX+= 1;
+                    circulos[posGX-1][posGY] = AZUL;
+                    break;
+                case 3:
+                    posGX-= 1;
+                    circulos[posGX+1][posGY] = AZUL;
+                    break;
+            }
+            circulos[posGX][posGY] = GATO;
+            System.out.println("posGX: " + posGX +" "+"posGY: " + posGY);
+        }
     }
 }

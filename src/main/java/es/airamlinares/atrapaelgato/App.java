@@ -1,5 +1,6 @@
 package es.airamlinares.atrapaelgato;
 
+import java.util.Random;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -31,10 +32,14 @@ public class App extends Application {
                 paneRoot.getChildren().add(tablero);
             }
         }
-       compGato.generarGato(paneRoot);
-       while(true) {
-            logica.colocarGris(3, 3);
-            logica.gato(1, 1);
+        compGato.generarGato(paneRoot);
+        for(int i=0; i<=16;i++){
+            Random random = new Random();
+            int posX = random.nextInt(13);
+            int posY = random.nextInt(9);
+            System.out.println("posX: " + posX +" "+"posY: " + posY);
+            logica.colocarGris(posX, posY);
+            logica.movGato();
             logica.mostrarTableroConsola();
         }
     }

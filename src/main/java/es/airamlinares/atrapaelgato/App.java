@@ -20,28 +20,10 @@ public class App extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-        ComportamientoGato compGato = new ComportamientoGato();
-        Logica logica = new Logica();
-        logica.mostrarTableroConsola();
-        for(int x = 30; x<TAM_X_PANTALLA; x+= 45 ) {
-            for(int y = 50; y<TAM_Y_PANTALLA; y+= 45 ) {
-                Tablero tablero = new Tablero(logica);
-                tablero.setCenterX(x);
-                tablero.setCenterY(y);
-                tablero.gris(compGato);
-                paneRoot.getChildren().add(tablero);
-            }
-        }
-        compGato.generarGato(paneRoot);
-        for(int i=0; i<=16;i++){
-            Random random = new Random();
-            int posX = random.nextInt(13);
-            int posY = random.nextInt(9);
-            System.out.println("posX: " + posX +" "+"posY: " + posY);
-            logica.colocarGris(posX, posY);
-            logica.movGato();
-            logica.mostrarTableroConsola();
-        }
+        
+        Tablero tablero = new Tablero();
+        //tablero.mostrarTableroConsola();
+        paneRoot.getChildren().add(tablero);
     }
 
     public static void main(String[] args) {

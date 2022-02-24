@@ -15,6 +15,9 @@ public class Logica {
     static final char GATO = '3';
     int posGX = 7;
     int posGY = 5;
+    int aPosGX = 7;
+    int aPosGY = 5;
+    int dir;
     
     public Logica() {
         tamXTablero = 14;
@@ -44,28 +47,53 @@ public class Logica {
 //    }
     public void movGato() {
         Random random = new Random();
-        int dir = random.nextInt(4);
+        dir = random.nextInt(4);
         System.out.println(dir);
-        if(posGX<=12 && posGY<=8 && posGX>0 && posGY>0) {
+        if(posGX<=14 && posGY<=10 && posGX>0 && posGY>0) {
             switch (dir) {
                 case 0:
-                    posGY-= 1;
-                    circulos[posGX][posGY+1] = AZUL;
+                    if(circulos[posGX][posGY-1] == AZUL) {
+                        aPosGY = posGY;
+                        aPosGX = posGX;
+                        circulos[posGX][posGY] = AZUL;
+                        posGY--;
+                    }else{
+                       dir = random.nextInt(4); 
+                    }
                     break;
                 case 1:
-                    posGY+= 1;
-                    circulos[posGX][posGY-1] = AZUL;
+                    if(circulos[posGX][posGY+1] == AZUL) {
+                        aPosGY = posGY;
+                        aPosGX = posGX;
+                        circulos[posGX][posGY] = AZUL;
+                        posGY++;
+                    }else{
+                       dir = random.nextInt(4); 
+                    }
                     break;
                 case 2:
-                    posGX+= 1;
-                    circulos[posGX-1][posGY] = AZUL;
+                    if(circulos[posGX+1][posGY] == AZUL) {
+                        aPosGX = posGX;
+                        aPosGY = posGY;
+                        circulos[posGX][posGY] = AZUL;
+                        posGX++;
+                    }else{
+                       dir = random.nextInt(4); 
+                    }
                     break;
                 case 3:
-                    posGX-= 1;
-                    circulos[posGX+1][posGY] = AZUL;
+                    if(circulos[posGX-1][posGY] == AZUL) {
+                        aPosGX = posGX;
+                        aPosGY = posGY;
+                        circulos[posGX][posGY] = AZUL;
+                        posGX--;
+                    }else{
+                       dir = random.nextInt(4); 
+                    }
                     break;
             }
             circulos[posGX][posGY] = GATO;
+            System.out.println("aposGX: " + aPosGX +" "+"aposGY: " + aPosGY);
             System.out.println("posGX: " + posGX +" "+"posGY: " + posGY);
         }
     }

@@ -1,7 +1,5 @@
 package es.airamlinares.atrapaelgato;
 
-import java.util.Random;
-
 /**
  *
  * @author Airam
@@ -13,11 +11,6 @@ public class Logica {
     static final char AZUL = '1';
     static final char GRIS = '2';
     static final char GATO = '3';
-    int posGX = 7;
-    int posGY = 5;
-    int aPosGX = 7;
-    int aPosGY = 5;
-    int dir;
     
     public Logica() {
         tamXTablero = 14;
@@ -42,59 +35,16 @@ public class Logica {
     public void colocarGris(int posX, int posY) {
         circulos[posX][posY] = GRIS;
     }
-//    public void gato(int posX, int posY) {
-//        circulos[posX][posY] = GATO;
-//    }
-    public void movGato() {
-        Random random = new Random();
-        dir = random.nextInt(4);
-        System.out.println(dir);
-        if(posGX<=14 && posGY<=10 && posGX>0 && posGY>0) {
-            switch (dir) {
-                case 0:
-                    if(circulos[posGX][posGY-1] == AZUL) {
-                        aPosGY = posGY;
-                        aPosGX = posGX;
-                        circulos[posGX][posGY] = AZUL;
-                        posGY--;
-                    }else{
-                       dir = random.nextInt(4); 
-                    }
-                    break;
-                case 1:
-                    if(circulos[posGX][posGY+1] == AZUL) {
-                        aPosGY = posGY;
-                        aPosGX = posGX;
-                        circulos[posGX][posGY] = AZUL;
-                        posGY++;
-                    }else{
-                       dir = random.nextInt(4); 
-                    }
-                    break;
-                case 2:
-                    if(circulos[posGX+1][posGY] == AZUL) {
-                        aPosGX = posGX;
-                        aPosGY = posGY;
-                        circulos[posGX][posGY] = AZUL;
-                        posGX++;
-                    }else{
-                       dir = random.nextInt(4); 
-                    }
-                    break;
-                case 3:
-                    if(circulos[posGX-1][posGY] == AZUL) {
-                        aPosGX = posGX;
-                        aPosGY = posGY;
-                        circulos[posGX][posGY] = AZUL;
-                        posGX--;
-                    }else{
-                       dir = random.nextInt(4); 
-                    }
-                    break;
-            }
-            circulos[posGX][posGY] = GATO;
-            System.out.println("aposGX: " + aPosGX +" "+"aposGY: " + aPosGY);
-            System.out.println("posGX: " + posGX +" "+"posGY: " + posGY);
+    
+    public void ganarPartida(ComportamientoGato compGato, PantallaFinal panFin) {
+        if(circulos[compGato.posGX][compGato.posGY-1] == GRIS && circulos[compGato.posGX][compGato.posGY+1] == GRIS && circulos[compGato.posGX-1][compGato.posGY] == GRIS && circulos[compGato.posGX+1][compGato.posGY] == GRIS) {
+            compGato.movConseguido = true;
+            panFin.pantallaGanar();
+        }
+    }
+    public void perderPartida(ComportamientoGato compGato) {
+        if(compGato.posGX == 0 || compGato.posGX == 14 || compGato.posGY == 0 || compGato.posGY == 10) {
+            panFin.pantallaPerder();
         }
     }
 }

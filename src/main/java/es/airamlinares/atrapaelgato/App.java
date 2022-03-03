@@ -1,6 +1,5 @@
 package es.airamlinares.atrapaelgato;
 
-import java.util.Random;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -22,7 +21,7 @@ public class App extends Application {
         stage.show();
         
         Tablero tablero = new Tablero();
-        //tablero.mostrarTableroConsola();
+        tablero.generarGato();
         paneRoot.getChildren().add(tablero);
     }
 

@@ -23,6 +23,9 @@ public class App extends Application {
         Tablero tablero = new Tablero();
         tablero.generarGato();
         paneRoot.getChildren().add(tablero);
+        
+        PantallaFinal panFin = new PantallaFinal();
+        paneRoot.getChildren().add(panFin);
     }
 
     public static void main(String[] args) {

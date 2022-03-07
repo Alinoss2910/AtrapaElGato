@@ -2,6 +2,7 @@ package es.airamlinares.atrapaelgato;
 
 import static es.airamlinares.atrapaelgato.Logica.AZUL;
 import static es.airamlinares.atrapaelgato.Logica.GATO;
+import static es.airamlinares.atrapaelgato.Logica.GRIS;
 import java.util.Random;
 
 /**
@@ -11,14 +12,14 @@ import java.util.Random;
 public class ComportamientoGato {
     byte posGX = 5;
     byte posGY = 5;
-    byte sPosGX = 5;
-    byte sPosGY = 5;
     boolean movConseguido = false;
     int dir;
     
-    public void movGato(Tablero tablero, Logica logica) {
-        movConseguido = false;
+    public void movGato(Tablero tablero, Logica logica, ComportamientoGato compGato) {
         Random random = new Random();
+        if(logica.circulos[compGato.posGX][compGato.posGY-1] == AZUL || logica.circulos[compGato.posGX][compGato.posGY+1] == AZUL || logica.circulos[compGato.posGX-1][compGato.posGY] == AZUL || logica.circulos[compGato.posGX+1][compGato.posGY] == AZUL) {
+            movConseguido = false;
+        }
         while(movConseguido == false) {
             dir = random.nextInt(4);
             System.out.println(dir);
@@ -64,8 +65,6 @@ public class ComportamientoGato {
                 logica.circulos[posGX][posGY] = GATO;
                 System.out.println("posGX: " + posGX +" "+"posGY: " + posGY);
                 logica.mostrarTableroConsola();
-                logica.ganarPartida(this);
-                logica.perderPartida(this);
             }
         }
     }

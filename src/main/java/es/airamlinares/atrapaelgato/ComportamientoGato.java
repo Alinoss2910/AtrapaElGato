@@ -2,7 +2,6 @@ package es.airamlinares.atrapaelgato;
 
 import static es.airamlinares.atrapaelgato.Logica.AZUL;
 import static es.airamlinares.atrapaelgato.Logica.GATO;
-import static es.airamlinares.atrapaelgato.Logica.GRIS;
 import java.util.Random;
 
 /**
@@ -15,15 +14,15 @@ public class ComportamientoGato {
     boolean movConseguido = false;
     int dir;
     
-    public void movGato(Tablero tablero, Logica logica, ComportamientoGato compGato) {
+    public void movGato(Tablero tablero, Logica logica) {
         Random random = new Random();
-        if(logica.circulos[compGato.posGX][compGato.posGY-1] == AZUL || logica.circulos[compGato.posGX][compGato.posGY+1] == AZUL || logica.circulos[compGato.posGX-1][compGato.posGY] == AZUL || logica.circulos[compGato.posGX+1][compGato.posGY] == AZUL) {
+        if(logica.circulos[posGX][posGY-1] == AZUL || logica.circulos[posGX][posGY+1] == AZUL || logica.circulos[posGX-1][posGY] == AZUL || logica.circulos[posGX+1][posGY] == AZUL) {
             movConseguido = false;
         }
         while(movConseguido == false) {
             dir = random.nextInt(4);
             System.out.println(dir);
-            if(posGX<=14 && posGY<=10 && posGX>0 && posGY>0) {
+            if(posGX<14 && posGY<10 && posGX>0 && posGY>0) {
                 switch (dir) {
                     case 0:
                         if(logica.circulos[posGX][posGY-1] == AZUL) {

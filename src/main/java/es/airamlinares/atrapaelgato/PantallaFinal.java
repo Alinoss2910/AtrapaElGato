@@ -1,7 +1,6 @@
 package es.airamlinares.atrapaelgato;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -35,23 +34,6 @@ public class PantallaFinal extends Pane {
         perdido.setFont(Font.font(20));
         perdido.setFill(Color.BLACK);
         mensajeGanar.getChildren().add(perdido);
-    }
-    
-    public PantallaFinal(ComportamientoGato compGato, Logica logica, Tablero tablero) {
-        Button reiniciar = new Button();
-        reiniciar.setOnMouseClicked((t) -> {
-            compGato.posGX = 5;
-            compGato.posGY = 5;
-            compGato.movConseguido = false;
-            reiniciar.setLayoutX(USE_PREF_SIZE);
-            for(int x=0; x<logica.tamXTablero; x++) {
-                for(int y=0; y<logica.tamYTablero; y++) {
-                    logica.circulos[x][y] = logica.AZUL;
-                }
-            }
-            tablero.getChildren().remove(tablero.imgGato);
-        });
-        this.getChildren().add(reiniciar);
     }
     
     public void ganarVisible() {

@@ -20,11 +20,12 @@ public class App extends Application {
         stage.setResizable(false);
         stage.show();
         
-        Tablero tablero = new Tablero();
+        PantallaFinal panFin = new PantallaFinal();
+        
+        Tablero tablero = new Tablero(panFin);
         tablero.generarGato();
         paneRoot.getChildren().add(tablero);
-        
-        PantallaFinal panFin = new PantallaFinal();
+        tablero.botonReiniciar(panFin);
         paneRoot.getChildren().add(panFin);
     }
 

@@ -20,12 +20,14 @@ public class Circulo extends Circle {
         this.setRadius(20);
         this.setFill(Color.LIGHTBLUE);
     }
-    public void gris(ComportamientoGato compGato, Tablero tablero, Logica logica) {
+    public void gris(ComportamientoGato compGato, Tablero tablero, Logica logica, PantallaFinal panFin) {
         this.setOnMousePressed((MouseEvent mouseEvent) -> {
             // Cambia el color del circulo cuando clickas en un circulo
             this.setFill(Color.GREY);
             logica.circulos[x][y] = logica.GRIS;
-            compGato.movGato(tablero, logica, compGato);
+            compGato.movGato(tablero, logica);
+            logica.ganarPartida(compGato, panFin);
+            logica.perderPartida(compGato, panFin);
         });
     }
 }

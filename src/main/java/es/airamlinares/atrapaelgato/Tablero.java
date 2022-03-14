@@ -4,7 +4,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 
 /**
  *
@@ -31,7 +30,7 @@ public class Tablero extends GridPane {
     }
     
     ImageView imgGato;
-    short posXGato = 5;
+    short posXGato = 6;
     short posYGato = 5;
     public void generarGato() {
         Image gato = new Image(getClass().getResourceAsStream("/images/gato.png"));
@@ -41,10 +40,22 @@ public class Tablero extends GridPane {
     
     public void botonReiniciar(PantallaFinal panFin) {
         Button reiniciar = new Button("Reiniciar");
-        reiniciar.setLayoutX(30);
-        reiniciar.setLayoutY(450);
         reiniciar.setOnMouseClicked((t) -> {
-            compGato.posGX = 5;
+            while(this.getChildren().size() != 0) {
+                for(int i = 0; i < this.getChildren().size(); i++ ) {
+                    this.getChildren().remove(i);
+                }
+            }
+            for(int x = 0; x<CELDASX; x++ ) {
+                for(int y = 0; y<CELDASY; y++ ) {
+                    circulo = new Circulo();
+                    circulo.x = x;
+                    circulo.y = y;
+                    circulo.gris(compGato, this, logica, panFin);
+                    this.add(circulo, x, y);
+                }
+        }
+            compGato.posGX = 6;
             compGato.posGY = 5;
             compGato.movConseguido = false;
             for(int x=0; x<logica.tamXTablero; x++) {
@@ -54,12 +65,8 @@ public class Tablero extends GridPane {
             }
             this.getChildren().remove(this.imgGato);
             this.add(imgGato, compGato.posGX, compGato.posGY);
+            panFin.setVisible(false);
         });
-        for(int x = 0; x<CELDASX; x++ ) {
-            for(int y = 0; y<CELDASY; y++ ) {
-               this.(circulo, x, y);
-            }
-        }
         panFin.getChildren().add(reiniciar);
     }
 }

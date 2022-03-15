@@ -25,6 +25,7 @@ public class App extends Application {
         Tablero tablero = new Tablero(panFin);
         tablero.generarGato();
         tablero.botonReiniciar(panFin);
+        tablero.botonSalir(stage, panFin);
         paneRoot.setCenter(tablero);
         paneRoot.setBottom(panFin);
     }

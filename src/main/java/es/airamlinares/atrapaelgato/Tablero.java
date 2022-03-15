@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 /**
  *
@@ -65,8 +66,17 @@ public class Tablero extends GridPane {
             }
             this.getChildren().remove(this.imgGato);
             this.add(imgGato, compGato.posGX, compGato.posGY);
-            panFin.setVisible(false);
+            panFin.getChildren().remove(panFin.ganado);
+            panFin.getChildren().remove(panFin.perdido);
         });
         panFin.getChildren().add(reiniciar);
+    }
+    
+    public void botonSalir(Stage stage, PantallaFinal panFin) {
+        Button salir = new Button("Salir");
+        salir.setOnMouseClicked((t) -> {
+            stage.close();
+        });
+        panFin.getChildren().add(salir);
     }
 }

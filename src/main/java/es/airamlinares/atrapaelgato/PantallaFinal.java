@@ -14,12 +14,12 @@ public class PantallaFinal extends HBox {
     Text perdido;
     Text ganado;
     public void pantallaPerder() {
-        this.setAlignment(Pos.CENTER);
+        this.setAlignment(Pos.BOTTOM_LEFT);
         this.setSpacing(10);
         this.setLayoutX(200);
         perdido = new Text("Has perdido");
         perdido.setFont(Font.font(20));
-        perdido.setVisible(false);
+//        perdido.setVisible(false);
         perdido.setFill(Color.BLACK);
 //        this.getChildren().add(perdido);
     }

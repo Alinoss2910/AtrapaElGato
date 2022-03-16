@@ -32,7 +32,7 @@ public class Tablero extends GridPane {
     
     ImageView imgGato;
     short posXGato = 6;
-    short posYGato = 5;
+    short posYGato = 3;
     public void generarGato() {
         Image gato = new Image(getClass().getResourceAsStream("/images/gato.png"));
         imgGato = new ImageView(gato);
@@ -57,7 +57,11 @@ public class Tablero extends GridPane {
                 }
         }
             compGato.posGX = 6;
-            compGato.posGY = 5;
+            compGato.posGY = 3;
+            compGato.abajo = 10 - compGato.posGY-2;
+            compGato.derecha = 14 - compGato.posGX-2;
+            compGato.izquierda = compGato.posGX;
+            compGato.arriba = compGato.posGY;
             compGato.movConseguido = false;
             for(int x=0; x<logica.tamXTablero; x++) {
                 for(int y=0; y<logica.tamYTablero; y++) {

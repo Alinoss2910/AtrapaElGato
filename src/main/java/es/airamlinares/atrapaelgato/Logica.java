@@ -35,10 +35,6 @@ public class Logica {
         System.out.println();
     }
     
-    public void colocarGris(int posX, int posY) {
-        circulos[posX][posY] = GRIS;
-    }
-    
     public void ganarPartida(ComportamientoGato compGato, PantallaFinal panFin) {
         if(circulos[compGato.posGX][compGato.posGY-1] == GRIS && circulos[compGato.posGX][compGato.posGY+1] == GRIS && circulos[compGato.posGX-1][compGato.posGY] == GRIS && circulos[compGato.posGX+1][compGato.posGY] == GRIS) {
             compGato.movConseguido = true;

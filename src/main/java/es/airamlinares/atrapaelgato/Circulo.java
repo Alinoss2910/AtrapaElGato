@@ -25,7 +25,7 @@ public class Circulo extends Circle {
             // Cambia el color del circulo cuando clickas en un circulo
             this.setFill(Color.GREY);
             logica.circulos[x][y] = logica.GRIS;
-            compGato.movGato(tablero, logica);
+            compGato.movGato(tablero, logica, this);
             logica.ganarPartida(compGato, panFin);
             logica.perderPartida(compGato, panFin);
         });

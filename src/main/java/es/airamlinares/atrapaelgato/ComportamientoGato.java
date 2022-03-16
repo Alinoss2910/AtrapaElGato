@@ -9,14 +9,17 @@ import java.util.Random;
  * @author Airam
  */
 public class ComportamientoGato {
-    byte posGX = 5;
-    byte posGY = 5;
+    byte posGX = 6;
+    byte posGY = 3;
     boolean movConseguido = false;
     int dir;
-    int abajo = 10 - posGY;
-    int derecha = 14 - posGX;
+    int abajo = 10 - posGY-2;
+    int derecha = 14 - posGX-2;
+    int izquierda = posGX;
+    int arriba = posGY;
+    Random random = new Random();
     
-    public void movGato(Tablero tablero, Logica logica) {
+    public void movGato(Tablero tablero, Logica logica, Circulo circulo) {
 //        Random random = new Random();
 //        if(logica.circulos[posGX][posGY-1] == AZUL || logica.circulos[posGX][posGY+1] == AZUL || logica.circulos[posGX-1][posGY] == AZUL || logica.circulos[posGX+1][posGY] == AZUL) {
 //            movConseguido = false;
@@ -68,55 +71,184 @@ public class ComportamientoGato {
 //                logica.mostrarTableroConsola();
 //            }
 //        }
-            
-//            while(movConseguido == false) {
                 if(posGX<14 && posGY<10 && posGX>0 && posGY>0) {
-                    System.out.println("esta dentro del tablero");
-                    if(posGX < posGY && posGX < abajo && posGX < derecha) {
+                    System.out.println("esta dentro del tablero" + " " + "abajo:" + abajo + " " + "derecha:" + derecha + " " + "arriba:" + arriba + " " + "izquierda:" + izquierda);
+                    if(izquierda < arriba && izquierda < abajo && izquierda < derecha) {
                         System.out.println("izquierda");
-                        if(logica.circulos[posGX-1][posGY] == AZUL) {
-                            System.out.println("izquierda conseguido");
+                        if(circulo.x < posGX && circulo.y == posGY || logica.circulos[posGX-1][posGY] == logica.GRIS) {
+                            if(logica.circulos[posGX][posGY-1] == AZUL) {
+                                    movConseguido = true;
+                                    logica.circulos[posGX][posGY] = AZUL;
+                                    posGY--;
+                                    arriba--;
+                                    abajo++;
+                                    tablero.getChildren().remove(tablero.imgGato);
+                                    tablero.add(tablero.imgGato, posGX, posGY);
+                                    System.out.println("arriba conseguido" + " " + "abajo:" + abajo + " " + "derecha:" + derecha + " " + "arriba:" + arriba + " " + "izquierda:" + izquierda);
+                            }else if(logica.circulos[posGX][posGY+1] == AZUL) {
+                                    movConseguido = true;
+                                    logica.circulos[posGX][posGY] = AZUL;
+                                    posGY++;
+                                    abajo--;
+                                    arriba++;
+                                    tablero.getChildren().remove(tablero.imgGato);
+                                    tablero.add(tablero.imgGato, posGX, posGY);
+                                    System.out.println("abajo conseguido" + " " + "abajo:" + abajo + " " + "derecha:" + derecha + " " + "arriba:" + arriba + " " + "izquierda:" + izquierda);
+                            }
+                        }else if(logica.circulos[posGX-1][posGY] == AZUL) {
                             movConseguido = true;
                             logica.circulos[posGX][posGY] = AZUL;
                             posGX--;
+                            izquierda--;
+                            derecha++;
                             tablero.getChildren().remove(tablero.imgGato);
                             tablero.add(tablero.imgGato, posGX, posGY);
+                            System.out.println("izquierda conseguido" + " " + "abajo:" + abajo + " " + "derecha:" + derecha + " " + "arriba:" + arriba + " " + "izquierda:" + izquierda);
                         }
-                    }else if(posGY < posGX && posGY < abajo && posGY < derecha) {
+                    }else if(arriba < izquierda && arriba < abajo && arriba < derecha) {
                         System.out.println("arriba");
-                        if(logica.circulos[posGX][posGY-1] == AZUL) {
-                            System.out.println("arriba conseguido");
+                        if(circulo.x == posGX && circulo.y < posGY || logica.circulos[posGX][posGY-1] == logica.GRIS) {
+                            if(logica.circulos[posGX-1][posGY] == AZUL) {
+                                movConseguido = true;
+                                logica.circulos[posGX][posGY] = AZUL;
+                                posGX--;
+                                izquierda--;
+                                derecha++;
+                                tablero.getChildren().remove(tablero.imgGato);
+                                tablero.add(tablero.imgGato, posGX, posGY);
+                                System.out.println("izquierda conseguido" + " " + "abajo:" + abajo + " " + "derecha:" + derecha + " " + "arriba:" + arriba + " " + "izquierda:" + izquierda);
+                            }else if(logica.circulos[posGX+1][posGY] == AZUL) {
+                                movConseguido = true;
+                                logica.circulos[posGX][posGY] = AZUL;
+                                posGX++;
+                                derecha--;
+                                izquierda++;
+                                tablero.getChildren().remove(tablero.imgGato);
+                                tablero.add(tablero.imgGato, posGX, posGY);
+                                System.out.println("derecha conseguido" + " " + "abajo:" + abajo + " " + "derecha:" + derecha + " " + "arriba:" + arriba + " " + "izquierda:" + izquierda);
+                            }else if(logica.circulos[posGX][posGY-1] == AZUL) {
+                                movConseguido = true;
+                                logica.circulos[posGX][posGY] = AZUL;
+                                posGY--;
+                                arriba--;
+                                abajo++;
+                                tablero.getChildren().remove(tablero.imgGato);
+                                tablero.add(tablero.imgGato, posGX, posGY);
+                                System.out.println("arriba conseguido" + " " + "abajo:" + abajo + " " + "derecha:" + derecha + " " + "arriba:" + arriba + " " + "izquierda:" + izquierda);
+                            }
+                        }else if(logica.circulos[posGX][posGY-1] == AZUL) {
                             movConseguido = true;
                             logica.circulos[posGX][posGY] = AZUL;
                             posGY--;
+                            arriba--;
+                            abajo++;
                             tablero.getChildren().remove(tablero.imgGato);
                             tablero.add(tablero.imgGato, posGX, posGY);
+                            System.out.println("arriba conseguido" + " " + "abajo:" + abajo + " " + "derecha:" + derecha + " " + "arriba:" + arriba + " " + "izquierda:" + izquierda);
                         }
-                    }else if(abajo < posGX && abajo < posGY && abajo < derecha) {
+                    }else if(abajo < izquierda && abajo < arriba && abajo < derecha) {
                         System.out.println("abajo");
-                        if(logica.circulos[posGX][posGY+1] == AZUL) {
-                            System.out.println("abajo conseguido");
+                        if(circulo.x == posGX && circulo.y > posGY || logica.circulos[posGX][posGY+1] == logica.GRIS) {
+                            if(logica.circulos[posGX-1][posGY] == AZUL) {
+                                movConseguido = true;
+                                logica.circulos[posGX][posGY] = AZUL;
+                                posGX--;
+                                izquierda--;
+                                derecha++;
+                                tablero.getChildren().remove(tablero.imgGato);
+                                tablero.add(tablero.imgGato, posGX, posGY);
+                                System.out.println("izquierda conseguido" + " " + "abajo:" + abajo + " " + "derecha:" + derecha + " " + "arriba:" + arriba + " " + "izquierda:" + izquierda);
+                            }else if(logica.circulos[posGX+1][posGY] == AZUL) {
+                                movConseguido = true;
+                                logica.circulos[posGX][posGY] = AZUL;
+                                posGX++;
+                                derecha--;
+                                izquierda++;
+                                tablero.getChildren().remove(tablero.imgGato);
+                                tablero.add(tablero.imgGato, posGX, posGY);
+                                System.out.println("derecha conseguido" + " " + "abajo:" + abajo + " " + "derecha:" + derecha + " " + "arriba:" + arriba + " " + "izquierda:" + izquierda);
+                            }else if(logica.circulos[posGX][posGY-1] == AZUL) {
+                                movConseguido = true;
+                                logica.circulos[posGX][posGY] = AZUL;
+                                posGY--;
+                                arriba--;
+                                abajo++;
+                                tablero.getChildren().remove(tablero.imgGato);
+                                tablero.add(tablero.imgGato, posGX, posGY);
+                                System.out.println("arriba conseguido" + " " + "abajo:" + abajo + " " + "derecha:" + derecha + " " + "arriba:" + arriba + " " + "izquierda:" + izquierda);
+                            }
+                        }else if(logica.circulos[posGX][posGY+1] == AZUL) {
                             movConseguido = true;
                             logica.circulos[posGX][posGY] = AZUL;
                             posGY++;
+                            abajo--;
+                            arriba++;
                             tablero.getChildren().remove(tablero.imgGato);
                             tablero.add(tablero.imgGato, posGX, posGY);
+                            System.out.println("abajo conseguido" + " " + "abajo:" + abajo + " " + "derecha:" + derecha + " " + "arriba:" + arriba + " " + "izquierda:" + izquierda);
                         }
-                    }else if(derecha < posGX && derecha < posGY && derecha < abajo) {
+                    }else if(derecha < izquierda && derecha < arriba && derecha < abajo) {
                         System.out.println("derecha");
-                        if(logica.circulos[posGX+1][posGY] == AZUL) {
-                            System.out.println("derecha conseguido");
+                        if(circulo.x < posGX && circulo.y == posGY || logica.circulos[posGX+1][posGY] == logica.GRIS) {
+                            if(logica.circulos[posGX][posGY-1] == AZUL) {
+                                movConseguido = true;
+                                logica.circulos[posGX][posGY] = AZUL;
+                                posGY--;
+                                arriba--;
+                                abajo++;
+                                tablero.getChildren().remove(tablero.imgGato);
+                                tablero.add(tablero.imgGato, posGX, posGY);
+                                System.out.println("arriba conseguido" + " " + "abajo:" + abajo + " " + "derecha:" + derecha + " " + "arriba:" + arriba + " " + "izquierda:" + izquierda);
+                            }else if(logica.circulos[posGX][posGY+1] == AZUL) {
+                                movConseguido = true;
+                                logica.circulos[posGX][posGY] = AZUL;
+                                posGY++;
+                                abajo--;
+                                arriba++;
+                                tablero.getChildren().remove(tablero.imgGato);
+                                tablero.add(tablero.imgGato, posGX, posGY);
+                                System.out.println("abajo conseguido" + " " + "abajo:" + abajo + " " + "derecha:" + derecha + " " + "arriba:" + arriba + " " + "izquierda:" + izquierda);
+                            }
+                        }else if(logica.circulos[posGX+1][posGY] == AZUL) {
                             movConseguido = true;
                             logica.circulos[posGX][posGY] = AZUL;
                             posGX++;
+                            derecha--;
+                            izquierda++;
                             tablero.getChildren().remove(tablero.imgGato);
                             tablero.add(tablero.imgGato, posGX, posGY);
+                            System.out.println("derecha conseguido" + " " + "abajo:" + abajo + " " + "derecha:" + derecha + " " + "arriba:" + arriba + " " + "izquierda:" + izquierda);
                         }
-                    } 
-                }
+                    }
+                    if(abajo == derecha || abajo == arriba || abajo == izquierda) {
+                        System.out.println("1 hola");
+                        abajo++;
+                        derecha--;
+                        arriba--;
+                        izquierda--;
+                    }else if(arriba == abajo || arriba == derecha || arriba == izquierda) {
+                        System.out.println("2 hola ");
+                        abajo--;
+                        derecha--;
+                        arriba++;
+                        izquierda--;
+                    }else if(derecha == arriba || derecha == abajo || derecha == izquierda) {
+                        System.out.println("3 hola ");
+                        abajo--;
+                        derecha++;
+                        arriba--;
+                        izquierda--;
+                    }else if(izquierda == arriba || izquierda == derecha || izquierda == abajo) {
+                        System.out.println("4 hola ");
+                        abajo--;
+                        derecha--;
+                        arriba--;
+                        izquierda++;
+                    }
+                }    
                 logica.circulos[posGX][posGY] = GATO;
-                System.out.println("posGX: " + posGX +" "+"posGY: " + posGY);
+                System.out.println("posGX:" + posGX +" "+"posGY:" + posGY);
                 logica.mostrarTableroConsola();
-//            }
+            
     }
 }

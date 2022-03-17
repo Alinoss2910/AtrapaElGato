@@ -36,11 +36,13 @@ public class Logica {
     }
     
     public void ganarPartida(ComportamientoGato compGato, PantallaFinal panFin) {
-        if(circulos[compGato.posGX][compGato.posGY-1] == GRIS && circulos[compGato.posGX][compGato.posGY+1] == GRIS && circulos[compGato.posGX-1][compGato.posGY] == GRIS && circulos[compGato.posGX+1][compGato.posGY] == GRIS) {
-            compGato.movConseguido = true;
-            System.out.println("Has ganado");
-            panFin.pantallaGanar();
-            panFin.ganarVisible();
+        if(compGato.posGX<14 && compGato.posGY<10 && compGato.posGX>0 && compGato.posGY>0) {
+            if(circulos[compGato.posGX][compGato.posGY-1] == GRIS && circulos[compGato.posGX][compGato.posGY+1] == GRIS && circulos[compGato.posGX-1][compGato.posGY] == GRIS && circulos[compGato.posGX+1][compGato.posGY] == GRIS) {
+                compGato.movConseguido = true;
+                System.out.println("Has ganado");
+                panFin.pantallaGanar();
+                panFin.ganarVisible();
+            }
         }
     }
     public void perderPartida(ComportamientoGato compGato, PantallaFinal panFin) {

@@ -17,6 +17,7 @@ public class Circulo extends Circle {
     int y;
     
     public Circulo() {
+        //Parametros del circulo 20 de radio y color Azul Claro
         this.setRadius(20);
         this.setFill(Color.LIGHTBLUE);
     }
@@ -24,8 +25,9 @@ public class Circulo extends Circle {
         this.setOnMousePressed((MouseEvent mouseEvent) -> {
             // Cambia el color del circulo cuando clickas en un circulo
             this.setFill(Color.GREY);
-            logica.circulos[x][y] = logica.GRIS;
-            compGato.movGato(tablero, logica, this);
+            logica.circulos[x][y] = logica.GRIS;// Pone en el array el circulo marcado
+            compGato.movGato(tablero, logica, this); // Llama al movGato para que se mueva
+            //Comprueba cada vez que haces click si ganas o pierdes
             logica.ganarPartida(compGato, panFin);
             logica.perderPartida(compGato, panFin);
         });
